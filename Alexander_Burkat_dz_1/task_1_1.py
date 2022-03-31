@@ -4,7 +4,7 @@
 # до суток: <h> час <m> мин <s> сек;
 # * в остальных случаях: <d> дн <h> час <m> мин <s> сек.
 
-duration = 3600
+duration = 400153
 
 secs = duration % 60
 mins = duration // 60 % 60
