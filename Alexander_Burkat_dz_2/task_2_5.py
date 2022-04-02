@@ -33,4 +33,4 @@ rev_prices = list(reversed(prices))
 # D. Вывести цены пяти самых дорогих товаров.
 # Сможете ли вывести цены этих товаров по возрастанию, написав минимум кода?
 
-print(', '.join(prices[len(prices) - 5:len(prices)]))
+print(', '.join(prices[- 5:]))
