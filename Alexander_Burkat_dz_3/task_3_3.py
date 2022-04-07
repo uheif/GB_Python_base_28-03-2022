@@ -11,16 +11,14 @@
 # сортировка по ключам? Можно ли использовать словарь в этом случае?
 
 def thesaurus(*args):
-    letters = []
-    for arg in sorted(args):
-        if not letters or arg[0] != letters[-1]:
-            letters.append(arg[0])
-
     my_dict = {}
-    for letter in letters:
-        my_dict[letter] = list(filter(lambda name: name.startswith(letter), args))
+    for arg in sorted(args):
+        if arg[0] not in my_dict:
+            my_dict[arg[0]] = list(filter(lambda x: x[0] == arg[0], args))
+
     return my_dict
 
 
 print(thesaurus("Иван", "Мария", "Петр", "Илья", "Роман", "Игорь", "Иван"))
 # {'И': ['Иван', 'Илья', 'Игорь', 'Иван'], 'М': ['Мария'], 'П': ['Петр'], 'Р': ['Роман']}
+
