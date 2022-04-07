@@ -19,15 +19,25 @@
 
 
 def thesaurus_adv(*args):
-    letters = []
-    for arg in sorted(map(lambda x: x.split(' ')[-1], args)):
-        if not letters or arg[0] != letters[-1]:
-            letters.append(arg[0])
+    def nm_i(full_name):
+        return full_name.split(' ')[0][0]
 
-    my_dict = {}
-    for letter in letters:
-        my_dict[letter] = list(filter(lambda name: name.split(' ')[-1].startswith(letter), args))
-    return my_dict
+    def snm_i(full_name):
+        return full_name.split(' ')[-1][0]
+
+    out_dict = {}
+    for arg in args:
+        if snm_i(arg) not in out_dict:
+            snm = snm_i(arg)
+            in_dict = {}
+            for arg in args:
+                if nm_i(arg) not in in_dict:
+                    in_lst = list(filter(lambda el: nm_i(el) == nm_i(arg) and snm_i(el) == snm, args))
+                    if in_lst:
+                        in_dict[nm_i(arg)] = in_lst
+            out_dict[snm] = in_dict
+
+    return out_dict
 
 
 print(thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева"))
