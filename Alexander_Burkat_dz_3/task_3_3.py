@@ -14,7 +14,7 @@ def thesaurus(*args):
     my_dict = {}
     for arg in sorted(args):
         if arg[0] not in my_dict:
-            my_dict[arg[0]] = list(filter(lambda x: x[0] == arg[0], args))
+            my_dict[arg[0]] = list(filter(lambda name: name[0] == arg[0], args))
 
     return my_dict
 
