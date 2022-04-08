@@ -1,5 +1,5 @@
-# *(вместо задачи 1) Доработать предыдущую функцию в num_translate_adv():
-# реализовать корректную работу с числительными, начинающимися с заглавной буквы — результат тоже
+# *(вместо задачи 1) Доработать предыдущую функцию в num_translate_adv(): реализовать
+# корректную работу с числительными, начинающимися с заглавной буквы — результат тоже
 # должен быть с заглавной. Например:
 # >>> num_translate_adv("One")
 # "Один"
@@ -7,7 +7,7 @@
 # "два"
 
 
-def num_translate(num):
+def num_translate_adv(num):
     my_dict = {'one': 'один',
                'two': 'два',
                'three': 'три',
@@ -18,6 +18,9 @@ def num_translate(num):
                'eight': 'восемь',
                'nine': 'девять',
                'ten': 'десять'}
-    return my_dict[num] if num in my_dict else None
 
-print(num_translate('one'))
+    if num.lower() in my_dict:
+        return my_dict[num.lower()].title() if num[0].isupper() else my_dict[num]
+
+
+print(num_translate_adv('eight'))
