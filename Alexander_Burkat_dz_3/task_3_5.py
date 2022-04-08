@@ -20,12 +20,19 @@ def get_jokes(lst1, lst2, lst3, n=3):
 
         return lst[randrange(len(lst))]
 
-    for i in range(n):
-        print(f'{lst1.pop(lst1.index(idx(lst1)))} {idx(lst2)} {idx(lst3)}')
-    print(lst1)
+    jokes = []
+    idxs = []
 
-    jokes = [f'{idx(lst1)} {idx(lst2)} {idx(lst3)}' for i in range(n)]
+    for i in range(n):
+        jokes.append(f'{idx(lst1)} {idx(lst2)} {idx(lst3)}')
+        print(jokes)
+        print(idx(lst1) in jokes[i])
+        # lst1_f = filter(idx(lst1) in jokes[n], lst1)
+        # print(lst1_f)
+
     return jokes
+
+print('a' in 'a b')
 
 
 print(get_jokes(nouns, adjectives, lst3=adverbs))
