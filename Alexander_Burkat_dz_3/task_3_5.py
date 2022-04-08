@@ -1,6 +1,5 @@
-#  Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов,
-#  взятых из трёх списков (по одному из каждого):
-#
+# Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов,
+# взятых из трёх списков (по одному из каждого)
 # Например:
 # >>> get_jokes(2)
 # ["лес завтра зеленый", "город вчера веселый"]
@@ -8,40 +7,31 @@
 # Сможете ли вы добавить еще один аргумент — флаг, разрешающий или запрещающий повторы слов в шутках
 # (когда каждое слово можно использовать только в одной шутке)? Сможете ли вы сделать аргументы именованными?
 
-from random import randrange, choice
+from random import choice, shuffle
 
-nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
-adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
-adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
 
-def get_jokes(lst1, lst2, lst3, n=3):
-    def idx(lst):
-        # lst_copy = lst[:]
+def get_jokes(n=3, repeat=True):
+    """
+    The function returns the specified number of jokes (3 by default)
+    with or without word repetitions (with by default)
+    """
 
-        return lst[randrange(len(lst))]
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
 
-    jokes = []
-    idxs1 = [i for i in range(len(lst1))]
-    print(idxs1)
-    idxs2 = [i for i in range(len(lst2))]
-    idxs3 = [i for i in range(len(lst3))]
-
-    for i in range(n):
-        idx1 = idxs1.pop(choice(idxs1))
-        print(idx1, idxs1)
-        idx2 = idxs2.pop(choice(idxs2))
-        idx3 = idxs3.pop(choice(idxs3))
-        jokes.append(f'{lst1[idx1]} {lst2[idx2]} {lst3[idx3]}')
-
-        print(jokes)
-        # print(idx(lst1) in jokes[i])
-        # lst1_f = filter(idx(lst1) in jokes[n], lst1)
-        # print(lst1_f)
+    if repeat:
+        jokes = [f'{choice(nouns)} {choice(adverbs)} {choice(adjectives)}' for _ in range(n)]
+    else:
+        shuffle(nouns)
+        shuffle(adverbs)
+        shuffle(adjectives)
+        if n > len(nouns):
+            n = len(nouns)
+            print(f'ой, я умею только {n} шуток без повторов :(')
+        jokes = [f'{nouns.pop()} {adverbs.pop()} {adjectives.pop()}' for _ in range(n)]
 
     return jokes
 
 
-
-print(get_jokes(nouns, adjectives, lst3=adverbs))
-
-
+print(get_jokes(6, repeat=False))
