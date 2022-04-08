@@ -22,9 +22,3 @@ def num_translate(num):
     return my_dict[num] if num in my_dict else None
 
 print(num_translate('one'))
-
-
-
-
-
-
