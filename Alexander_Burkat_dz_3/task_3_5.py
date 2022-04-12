@@ -7,7 +7,7 @@
 # Сможете ли вы добавить еще один аргумент — флаг, разрешающий или запрещающий повторы слов в шутках
 # (когда каждое слово можно использовать только в одной шутке)? Сможете ли вы сделать аргументы именованными?
 
-from random import choice, shuffle
+from random import choice, sample
 
 
 def get_jokes(n=3, repeat=True):
@@ -23,15 +23,14 @@ def get_jokes(n=3, repeat=True):
     if repeat:
         jokes = [f'{choice(nouns)} {choice(adverbs)} {choice(adjectives)}' for _ in range(n)]
     else:
-        shuffle(nouns)
-        shuffle(adverbs)
-        shuffle(adjectives)
-        if n > len(nouns):
-            n = len(nouns)
+        min_len = min(len(nouns), len(adverbs), len(adjectives))
+        if n > min_len:
+            n = min_len
             print(f'ой, я умею только {n} шуток без повторов :(')
-        jokes = [f'{nouns.pop()} {adverbs.pop()} {adjectives.pop()}' for _ in range(n)]
+        jokes = [
+            f'{noun} {adv} {adj}' for noun, adv, adj in zip(*map(lambda x: sample(x, n), [nouns, adverbs, adjectives]))
+        ]
 
     return jokes
 
 
-print(get_jokes(6, repeat=False))
