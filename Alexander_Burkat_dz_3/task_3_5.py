@@ -33,4 +33,3 @@ def get_jokes(n=3, repeat=True):
 
     return jokes
 
-
