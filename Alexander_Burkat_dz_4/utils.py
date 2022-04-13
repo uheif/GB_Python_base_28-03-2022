@@ -8,13 +8,12 @@ def currency_rates(cur):
     content = requests.get(url).text
     _serv_date = content.split('Date=')[1].split('"')[1]
     serv_date = datetime.strptime(_serv_date, '%d.%m.%Y').date()
-    curss = content.split('<CharCode>')
-    value = None
-    for el in curss:
-        if el[:3] == cur.upper():
-            value = Decimal(el.split('Value')[1].strip('<>/').replace(',', '.')).quantize(Decimal('1.00'))
-            break
-
+    cur = cur.upper()
+    if cur in content:
+        _value = content.split(cur)[1].split('Value')[1].strip('></').replace(',', '.')
+        value = Decimal(_value).quantize(Decimal('1.00'))
+    else:
+        value = None
 
     return value, serv_date
 
