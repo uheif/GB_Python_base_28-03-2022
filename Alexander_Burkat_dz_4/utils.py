@@ -1,24 +1,25 @@
 import requests
 from decimal import Decimal
-import datetime
+from datetime import datetime
 
 
 def currency_rates(cur):
     url = 'http://www.cbr.ru/scripts/XML_daily.asp'
-    response = requests.get(url)
-    content = response.text
-    serv_time = content.split('Date=')[1].split('"')[1]
-    serv_time = datetime.datetime.strptime(serv_time, '%d.%m.%Y').date()
-    cusrs = content.split('<CharCode>')
-    for el in cusrs:
+    content = requests.get(url).text
+    _serv_date = content.split('Date=')[1].split('"')[1]
+    serv_date = datetime.strptime(_serv_date, '%d.%m.%Y').date()
+    curss = content.split('<CharCode>')
+    value = None
+    for el in curss:
         if el[:3] == cur.upper():
-            value = Decimal(el.split('Value')[1].strip('<>/').replace(',', '.'))
+            value = Decimal(el.split('Value')[1].strip('<>/').replace(',', '.')).quantize(Decimal('1.00'))
             break
-        else:
-            value = None
 
-    return value, serv_time
+
+    return value, serv_date
 
 
 if __name__ == '__main__':
-    print(currency_rates('UsD'))
+    print(*currency_rates('UsD'), sep=', ')  # 79.85, 2022-04-14
+    print(*currency_rates('EUR'), sep=', ')  # 86.72, 2022-04-14
+    print(*currency_rates('tuf'), sep=', ')  # None, 2022-04-14
