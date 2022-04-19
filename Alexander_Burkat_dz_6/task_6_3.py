@@ -13,13 +13,26 @@
 # скалолазание,охота
 # горные лыжи
 
+from itertools import zip_longest
+import json
+
 with open('users.csv', 'w', encoding='UTF-8') as f, open('hobby.csv', 'w', encoding='UTF-8') as b:
-    f.write('''Иванов,Иван,Иванович 
+    f.write('''Иванов,Иван,Иванович
 Петров,Петр,Петрович'''
             )
-    b.write('''скалолазание,охота
-горные лыжи'''
+    b.write('''скалолазание,охота'''
             )
 
 
+with open('users.csv', 'r', encoding='UTF-8') as f, open('hobby.csv', 'r', encoding='UTF-8') as b:
+    users = f.read().split('\n')
+    hobby = b.read().split('\n')
+    if len(users) - len(hobby) >= 0:
+        dct = {user.replace(',', ' '): hob.split(',') if hob else None for user, hob in zip_longest(users, hobby)}
+    else:
+        exit(1)
+
+
+with open ('users_hobby.json', 'w', encoding='UTF-8') as f:
+    json.dump(dct, f, ensure_ascii=False)
 
