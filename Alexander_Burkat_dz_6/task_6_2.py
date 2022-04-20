@@ -7,10 +7,8 @@ spam = {}
 with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
     for _line in f:
         ip = f.readline().split()[0]
-        if ip not in spam:
-            spam[ip] = 1
-        else:
-            spam[ip] += 1
+        spam[ip] = 1 if ip not in spam else spam[ip] + 1
+
 
 attacks = max(spam[ip] for ip in spam if spam[ip] > 1)
 
