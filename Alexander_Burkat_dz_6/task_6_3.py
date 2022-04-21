@@ -20,7 +20,9 @@ with open('users.csv', 'w', encoding='UTF-8') as f, open('hobby.csv', 'w', encod
     f.write('''Иванов,Иван,Иванович
 Петров,Петр,Петрович'''
             )
-    b.write('''скалолазание,охота'''
+    b.write('''скалолазание,охота
+вело
+фото'''
             )
 
 
