@@ -10,5 +10,5 @@
 with open('users.csv', 'r', encoding='UTF-8') as f, open('hobby.csv', 'r', encoding='UTF-8') as b:
     with open('users_hobby.txt', 'a', encoding='UTF-8') as c:
         for line_f in f:
-            c.write(f'{line_f.strip().replace(",", " ")}: {b.readline() or None}')
+            c.write(f'{line_f.strip().replace(",", " ")}: {b.readline().strip() or None}\n')
 
