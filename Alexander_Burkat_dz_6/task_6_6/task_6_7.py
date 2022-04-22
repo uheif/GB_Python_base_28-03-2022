@@ -2,23 +2,25 @@
 # передаём ему номер записи и новое значение. При этом файл не должен читаться целиком — обязательное требование.
 # Предусмотреть ситуацию, когда пользователь вводит номер записи, которой не существует.
 
+from sys import argv
 
-id = '2'
+id = argv[1]
 id_exists = False
-price = '0'
-position = 0
+price = argv[2]
 
 with open('bakery.csv', 'br+') as f:
-    line = f.readline().decode()
-    while line:
-        position += f.tell()
-        if line.split()[0] == id:
+    for line in f:
+        if line.decode().split()[0] == id:
             id_exists = True
-            f.seek(position - f.tell())
+            f.seek(-len(line), 1)
             new_line = f'{id} {float(price)}'
-            f.write((new_line + ' ' * (len(line) - len(new_line) - 1)).encode())
+            dif = len(line.decode()) - len(new_line) - 1
+            if dif >= 0:
+                f.write((new_line + ' ' * dif).encode())
+            else:
+                print('''упс, я не дослушал конец лекции и не сделал в шестом задании записи фиксированной длины :(
+попробуйте ввести число покороче''')
             break
-        line = f.readline().decode()
 
 if not id_exists:
     print('Такой записи не существует')
