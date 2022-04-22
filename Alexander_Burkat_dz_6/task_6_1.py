@@ -14,7 +14,7 @@
 parse = []
 with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
     for _line in f:
-        line = f.readline().split()
+        line = _line.split()
         parse.append((line[0], line[5].lstrip('"'), line[6]))
 
 print(parse)

@@ -34,7 +34,5 @@ with open('users.csv', 'r', encoding='UTF-8') as f, open('hobby.csv', 'r', encod
     else:
         exit(1)
 
-
 with open ('users_hobby.json', 'w', encoding='UTF-8') as f:
     json.dump(dct, f, ensure_ascii=False)
-
