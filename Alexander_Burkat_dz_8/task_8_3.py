@@ -33,10 +33,8 @@ def type_logger(func):
 
 
 @type_logger
-def calc_cube(a, b, c=45, e=''):
-    return a, b, c, e
+def calc_cube(a, b, c=45, d=''):
+    return a, b, c, d
 
 
-calc_cube(5, 6.34, c=False, e='i')
-
-print(calc_cube(5, 6.34, c=False, e='i'))
+calc_cube(5, 6.34, c=False, d='i')
