@@ -22,7 +22,7 @@ def type_logger(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        result = func(*args, *kwargs)
+        result = func(*args, **kwargs)
         log = [f'{arg}: {type(arg)}' for arg in args]
         if kwargs:
             log.extend([f'{value}: {type(value)}' for value in kwargs.values()])
@@ -38,3 +38,5 @@ def calc_cube(a, b, c=45, e=''):
 
 
 calc_cube(5, 6.34, c=False, e='i')
+
+print(calc_cube(5, 6.34, c=False, e='i'))
