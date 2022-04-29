@@ -10,18 +10,8 @@
 
 import re
 
+pattern = re.compile(r'(.+)\s-\s-.+\[(.+)]\s\"([A-Z]+)\s([/\w]+).+\s(\d{3})\s(\d{1,3})')
+
 with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
-    content = f.read().splitlines()
-
-print(content)
-
-pattern = re.compile(r'^[\w\.]+\s'
-                     r'\[\d{1,2}/[A-Za-z]+/[\d:]+\s\+\d+\]'
-                     r'\"[A-Z]+\s'
-                     r'\/[\w]+/[\w]+\s'
-                     r'\s\d{3}'
-                     r'\s\d{1}\s')
-
-for line in content:
-    result = pattern.findall(line)
-
+    for line in f:
+        print(*(el.groups() for el in pattern.finditer(line)))
