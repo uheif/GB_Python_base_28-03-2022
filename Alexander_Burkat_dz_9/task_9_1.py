@@ -11,13 +11,12 @@
 import time
 
 
-class TrafficLight():
+class TrafficLight:
     colors = {1: (f'\033[31m{"red"}', 7), 2: (f'\033[33m{"yellow"}', 2), 3: (f'\033[32m{"green"}', 5)}
     __color = None
 
     def running(self, color: int, work_time: int):
-        self.__color = color
-        self.work_time = work_time  # секунды
+        TrafficLight.__color = color
         stop = time.perf_counter() + work_time
         while time.perf_counter() <= stop:
             if self.__color > 3:
@@ -27,5 +26,5 @@ class TrafficLight():
             self.__color += 1
 
 
-tl = TrafficLight()
-tl.running(1, 20)
+t_l = TrafficLight()
+t_l.running(1, 20)
