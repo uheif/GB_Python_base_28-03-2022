@@ -12,7 +12,7 @@ import time
 
 
 class TrafficLight:
-    colors = {1: (f'\033[31m{"red"}', 7), 2: (f'\033[33m{"yellow"}', 2), 3: (f'\033[32m{"green"}', 5)}
+    colors = {1: (f'\r\033[31m{"red"}', 7), 2: (f'\r\033[33m{"yellow"}', 2), 3: (f'\r\033[32m{"green"}', 5)}
     __color = None
 
     def running(self, color: int, work_time: int):
@@ -21,7 +21,7 @@ class TrafficLight:
         while time.perf_counter() <= stop:
             if self.__color > 3:
                 self.__color = 1
-            print(TrafficLight.colors[self.__color][0])
+            print(TrafficLight.colors[self.__color][0], end='')
             time.sleep(TrafficLight.colors[self.__color][1])
             self.__color += 1
 

@@ -11,8 +11,9 @@ class Road:
         self._length = length
         self._width = width
 
-    def asphalt(self, weight=25, depth=1):
-        return self._length * self._width * weight * depth
+    def asphalt_calc(self, weight=25, depth=1):
+        return round(self._length * self._width * weight * depth / 1000, 2)
+
 
 r = Road(10, 15)
-print(r.asphalt())  # 3750
+print(r.asphalt_calc())  # 3,75

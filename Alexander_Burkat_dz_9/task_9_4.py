@@ -39,13 +39,12 @@ class SportCar(Car):
 
 class WorkCar(Car):
     def show_speed(self):
-        print(self.speed if self.speed <= 60 else f'{self.speed}! Превышаешь, Петрович!')
+        print(self.speed if self.speed <= 40 else f'{self.speed}! Превышаешь, Петрович!')
 
 
 class PoliceCar(Car):
     def __init__(self, speed, color, name, is_police=True):
-        super().__init__(speed, color, name)
-        self.is_police = is_police
+        super().__init__(speed, color, name, is_police)
 
 
 car1 = TownCar(220, 'red', 'ласточка')
@@ -57,3 +56,4 @@ print(car1.name, car1.color)
 car2 = PoliceCar(300, 'black-white', 'bluesmobile')
 print(car2.is_police)
 print(car2.name, car2.speed)
+car2.turn('left')
