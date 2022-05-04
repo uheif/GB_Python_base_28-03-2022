@@ -21,11 +21,12 @@ class Cell:
         return Cell(self.nucl // other.nucl)
 
     def make_order(self, row):
-        return ''.join([f'{"*" * row}\\n' for _ in range(self.nucl // row)]) + f'{"*" * (self.nucl % row)}'
+        return ''.join([f'{"*" * row}\\n' for _ in range(self.nucl // row - 1)]) + f'{"*" * row}' + \
+               f'{"*" * (self.nucl % row)}'
 
 x = Cell(17)
 y = Cell(21)
 print(x + y)
 print(x - y)
 print(y // x)
-print(y.make_order(16))
+print(y.make_order(4))
