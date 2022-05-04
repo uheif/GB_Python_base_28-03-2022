@@ -25,6 +25,7 @@ class Matrix:
 
     def __str__(self):
         return ''.join([f'|{" ".join(list(map(str, lst)))}|\n' for lst in self.lst_lsts])
+        # хотелось бы ещё выровнять столбцы, но время поджимает :(
 
     def __add__(self, other):
         return \
