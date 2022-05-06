@@ -21,7 +21,7 @@ class Date:
 
     @staticmethod
     def check(day, month, year):
-        return 0 < day <= 31, 0 < month <= 12, 0 < year < 2022
+        return 0 < day <= 31 and 0 < month <= 12 and 0 < year < 2022
 
 
 my_date = Date.date_int('02-04-1983')
