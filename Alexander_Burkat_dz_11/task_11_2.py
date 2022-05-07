@@ -7,6 +7,7 @@ class MyExc(Exception):
     def __init__(self, message):
         self.message = message
 
+
 a = int(input('Введите делимое: '))
 b = int(input('Введите делитель: '))
 
